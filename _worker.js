@@ -4,13 +4,13 @@ import { connect } from 'cloudflare:sockets';
 
 // How to generate your own UUID:
 // [Windows] Press "Win + R", input cmd and run:  Powershell -NoExit -Command "[guid]::NewGuid()"
-let userID = '90cd4a77-141a-43c9-991b-08263cfe9c10';
+let userID = '9bc95017-7a67-4775-a6b1-362a618f8f88';
 
 let proxyIP = '';// 小白勿动，该地址并不影响你的网速，这是给CF代理使用的。'cdn.xn--b6gac.eu.org, cdn-all.xn--b6gac.eu.org, workers.cloudflare.cyou'
 
 let sub = '';// 留空则使用内置订阅
-let subconverter = 'apiurl.v1.mk';// clash订阅转换后端，目前使用肥羊的订阅转换功能。自带虚假uuid和host订阅。
-let subconfig = "https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/config/ACL4SSR_Online_Full_MultiMode.ini"; //订阅配置文件
+let subconverter = 'url.v1.mk';// clash订阅转换后端，目前使用肥羊的订阅转换功能。自带虚假uuid和host订阅。
+let subconfig = "https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/config/ACL4SSR_Online_MultiCountry.ini"; //订阅配置文件
 
 // The user name and password do not contain special characters
 // Setting the address will ignore proxyIP
@@ -39,7 +39,7 @@ let DLS = 8;
 let FileName = 'edgetunnel';
 let BotToken ='';
 let ChatID =''; 
-let proxyhosts = [];//本地代理域名池
+let proxyhosts = ['sub.cmliussss2017.dedyn.io'];//本地代理域名池
 let proxyhostsURL = 'https://raw.githubusercontent.com/cmliu/CFcdnVmess2sub/main/proxyhosts';//在线代理域名池URL
 let RproxyIP = 'false';
 export default {
@@ -111,7 +111,7 @@ export default {
 					return new Response(`${fakeConfig}`, { status: 200 });
 				case `/${userID}`: {
 					await sendMessage(`#获取订阅 ${FileName}`, request.headers.get('CF-Connecting-IP'), `UA: ${UA}</tg-spoiler>\n域名: ${url.hostname}\n<tg-spoiler>入口: ${url.pathname + url.search}</tg-spoiler>`);
-					if ((!sub || sub == '') && (addresses.length + addressesapi.length + addressesnotls.length + addressesnotlsapi.length + addressescsv.length) == 0) sub = 'vless-4ca.pages.dev';
+					if ((!sub || sub == '') && (addresses.length + addressesapi.length + addressesnotls.length + addressesnotlsapi.length + addressescsv.length) == 0) sub = 'notls.cmliussss2017.dedyn.io';
 					const vlessConfig = await getVLESSConfig(userID, request.headers.get('Host'), sub, UA, RproxyIP, url);
 					const now = Date.now();
 					//const timestamp = Math.floor(now / 1000);
@@ -968,19 +968,19 @@ async function getVLESSConfig(userID, hostName, sub, UA, RproxyIP, _url) {
 Subscribe / sub 订阅地址, 支持 Base64、clash-meta、sing-box 订阅格式, ${订阅器}
 ---------------------------------------------------------------
 快速自适应订阅地址:
-https://${hostName}/${userID}
+https://${proxyhosts}/${hostName}/${userID}
 
 Base64订阅地址:
-https://${hostName}/${userID}?sub
-https://${hostName}/${userID}?b64
-https://${hostName}/${userID}?base64
+https://${proxyhosts}/${hostName}/${userID}?sub
+https://${proxyhosts}/${hostName}/${userID}?b64
+https://${proxyhosts}/${hostName}/${userID}?base64
 
 clash订阅地址:
-https://${hostName}/${userID}?clash
+https://${proxyhosts}/${hostName}/${userID}?clash
 
 singbox订阅地址:
-https://${hostName}/${userID}?sb
-https://${hostName}/${userID}?singbox
+https://${proxyhosts}/${hostName}/${userID}?sb
+https://${proxyhosts}/${hostName}/${userID}?singbox
 ---------------------------------------------------------------
 ################################################################
 v2ray
