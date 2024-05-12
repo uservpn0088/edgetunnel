@@ -33,7 +33,7 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)
 ## Workers 部署方法 [视频教程](https://www.youtube.com/watch?v=LeT4jQUh8ok&t=83s)
 1. 部署 Cloudflare Worker：
    - 在 Cloudflare Worker 控制台中创建一个新的 Worker。
-   - 将 [worker.js](https://github.com/cmliu/edgetunnel/blob/main/_worker.js) 的内容粘贴到 Worker 编辑器中。
+   - 将 [worker.js](https://github.com/cmliu/edgetunnel/blob/notls/_worker.js) 的内容粘贴到 Worker 编辑器中。
    - 将第 7 行 `userID` 修改成你自己的 **UUID** 。
 
 2. 访问订阅内容：
@@ -53,79 +53,8 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)
 
 4. 使用自己的`优选域名`/`优选IP`的订阅内容：
    - 如果你想使用自己的优选域名或者是自己的优选IP，可以参考 [WorkerVless2sub GitHub 仓库](https://github.com/cmliu/WorkerVless2sub) 中的部署说明自行搭建。
-   - 打开 [worker.js](https://github.com/cmliu/edgetunnel/blob/main/_worker.js) 文件，在第 12 行找到 `sub` 变量，将其修改为你部署的订阅生成器地址。例如 `let sub = 'sub.cmliussss.workers.dev';`，注意不要带https等协议信息和符号。
+   - 打开 [worker.js](https://github.com/cmliu/edgetunnel/blob/notls/_worker.js) 文件，在第 12 行找到 `sub` 变量，将其修改为你部署的订阅生成器地址。例如 `let sub = 'sub.cmliussss.workers.dev';`，注意不要带https等协议信息和符号。
    - 注意，如果您使用了自己的订阅地址，要求订阅生成器的 `sub`域名 和 `[YOUR-WORKER-URL]`的域名 不同属一个顶级域名，否则会出现异常。您可以在 `sub` 变量赋值为 workers.dev 分配到的域名。
-
-</details>
-
-## Pages 上传 部署方法 **最佳推荐!!!** [视频教程](https://www.youtube.com/watch?v=59THrmJhmAw)
-1. 部署 Cloudflare Pages：
-   - 下载 [worker.zip](https://raw.githubusercontent.com/cmliu/edgetunnel/main/worker.zip) 文件，并点上 Star !!!
-   - 在 Cloudflare Pages 控制台中选择 `上传资产`后，为你的项目取名后点击 `创建项目`，然后上传你下载好的 [worker.zip](https://raw.githubusercontent.com/cmliu/edgetunnel/main/worker.zip) 文件后点击 `部署站点`。
-   - 部署完成后点击 `继续处理站点` 后，选择 `设置` > `环境变量` > **制作**为生产环境定义变量 > `添加变量`。
-     变量名称填写**UUID**，值则为你的UUID，后点击 `保存`即可。
-   - 返回 `部署` 选项卡，在右下角点击 `创建新部署` 后，重新上传 [worker.zip](https://raw.githubusercontent.com/cmliu/edgetunnel/main/worker.zip) 文件后点击 `保存并部署` 即可。
-
-2. 访问订阅内容：
-   - 访问 `https://[YOUR-PAGES-URL]/[YOUR-UUID]` 即可获取订阅内容。
-   - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10` 就是你的通用自适应订阅地址。
-   - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?sub` Base64订阅格式，适用PassWall,SSR+等。
-   - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?clash` Clash订阅格式，适用OpenClash等。
-   - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?sb` singbox订阅格式，适用singbox等。
-
-<details>
-<summary><code><strong>「 我自己有域名！我要绑定自己的域名！我已经熟练的掌握域名解析！ 」</strong></code></summary>
-   
-3. 给 Pages绑定 CNAME自定义域：[视频教程](https://www.youtube.com/watch?v=LeT4jQUh8ok&t=851s)
-   - 在 Pages控制台的 `自定义域`选项卡，下方点击 `设置自定义域`。
-   - 填入你的自定义次级域名，注意不要使用你的根域名，例如：
-     您分配到的域名是 `fuck.cloudns.biz`，则添加自定义域填入 `lizi.fuck.cloudns.biz`即可；
-   - 按照 Cloudflare 的要求将返回你的域名DNS服务商，添加 该自定义域 `lizi`的 CNAME记录 `edgetunnel.pages.dev` 后，点击 `激活域`即可。
-   - **如果你是小白，那么你的 pages 绑定`自定义域`之后即可直接起飞，不用再往下看了！！！**
-   - 
-</details>
-<details>
-<summary><code><strong>「 我不是小白！我真的真的不是小白！我要玩花活！我要开启高端玩法！ 」</strong></code></summary>
-   
-4. 使用自己的`优选域名`/`优选IP`的订阅内容：
-   - 如果你想使用自己的优选域名或者是自己的优选IP，可以参考 [WorkerVless2sub GitHub 仓库](https://github.com/cmliu/WorkerVless2sub) 中的部署说明自行搭建。
-   - 在 Pages控制台的 `设置`选项卡，选择 `环境变量`> `制作`> `编辑变量`> `添加变量`；
-   - 变量名设置为`SUB`，对应的值为你部署的订阅生成器地址。例如 `sub.cmliussss.workers.dev`，后点击 **保存**。
-   - 之后在 Pages控制台的 `部署`选项卡，选择 `所有部署`> `最新部署最右的 ...`> `重试部署`，即可。
-   - 注意，如果您使用了自己的订阅地址，要求订阅生成器的 `SUB`域名 和 `[YOUR-PAGES-URL]`的域名 不同属一个顶级域名，否则会出现异常。您可以在 `SUB` 变量赋值为 Pages.dev 分配到的域名。
-
-</details>
-
-## Pages GitHub 部署方法 [视频教程](https://www.youtube.com/watch?v=LeT4jQUh8ok&t=560s)
-1. 部署 Cloudflare Pages：
-   - 在 Github 上先 Fork 本项目，并点上 Star !!!
-   - 在 Cloudflare Pages 控制台中选择 `连接到 Git`后，选中 `edgetunnel`项目后点击 `开始设置`。
-   - 在 `设置构建和部署`页面下方，选择 `环境变量（高级）`后并 `添加变量`
-     变量名称填写**UUID**，值则为你的UUID，后点击 `保存并部署`即可。
-
-2. 访问订阅内容：
-   - 访问 `https://[YOUR-PAGES-URL]/[YOUR-UUID]` 即可获取订阅内容。
-   - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10` 就是你的通用自适应订阅地址。
-   - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?sub` Base64订阅格式，适用PassWall,SSR+等。
-   - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?clash` Clash订阅格式，适用OpenClash等。
-   - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?sb` singbox订阅格式，适用singbox等。
-
-3. 给 Pages绑定 CNAME自定义域：[视频教程](https://www.youtube.com/watch?v=LeT4jQUh8ok&t=851s)
-   - 在 Pages控制台的 `自定义域`选项卡，下方点击 `设置自定义域`。
-   - 填入你的自定义次级域名，注意不要使用你的根域名，例如：
-     您分配到的域名是 `fuck.cloudns.biz`，则添加自定义域填入 `lizi.fuck.cloudns.biz`即可；
-   - 按照 Cloudflare 的要求将返回你的域名DNS服务商，添加 该自定义域 `lizi`的 CNAME记录 `edgetunnel.pages.dev` 后，点击 `激活域`即可。
-   - **如果你是小白，那么你的 pages 绑定`自定义域`之后即可直接起飞，不用再往下看了！！！**
-
-<details>
-<summary><code><strong>「 我不是小白！我真的真的不是小白！我要玩花活！我要开启高端玩法！ 」</strong></code></summary>
-
-4. 使用自己的`优选域名`/`优选IP`的订阅内容：
-   - 如果你想使用自己的优选域名或者是自己的优选IP，可以参考 [WorkerVless2sub GitHub 仓库](https://github.com/cmliu/WorkerVless2sub) 中的部署说明自行搭建。
-   - 在 Pages控制台的 `设置`选项卡，选择 `环境变量`> `制作`> `编辑变量`> `添加变量`；
-   - 变量名设置为`SUB`，对应的值为你部署的订阅生成器地址。例如 `sub.cmliussss.workers.dev`，后点击 **保存**。
-   - 之后在 Pages控制台的 `部署`选项卡，选择 `所有部署`> `最新部署最右的 ...`> `重试部署`，即可。
-   - 注意，如果您使用了自己的订阅地址，要求订阅生成器的 `SUB`域名 和 `[YOUR-PAGES-URL]`的域名 不同属一个顶级域名，否则会出现异常。您可以在 `SUB` 变量赋值为 Pages.dev 分配到的域名。
 
 </details>
 
